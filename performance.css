@@ -1,0 +1,598 @@
+/* ===== OPTIMISATIONS DE PERFORMANCE ===== */
+
+/* Critical CSS - Styles au-dessus de la ligne de flottaison */
+.critical-css {
+    /* Styles essentiels pour le contenu visible */
+    color: inherit;
+    font-family: inherit;
+}
+
+/* Lazy loading pour les images */
+.lazy {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.lazy.loaded {
+    opacity: 1;
+}
+
+/* Optimisation des polices */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap; /* Évite le blocage du rendu */
+    src: local('Inter Regular'), local('Inter-Regular'),
+         url('/fonts/inter-v12-latin-regular.woff2') format('woff2'),
+         url('/fonts/inter-v12-latin-regular.woff') format('woff');
+}
+
+/* Optimisation des animations */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Optimisation pour les écrans haute densité */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-image {
+        background-image: url('/images/hero@2x.jpg');
+    }
+}
+
+/* Conteneur pour le lazy loading */
+.image-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+
+.image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, #f8f9fa 25%, #e9ecef 50%, #f8f9fa 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    z-index: 1;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.image-container.loaded::before {
+    display: none;
+}
+
+/* Optimisation des scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Optimisation pour l'impression */
+@media print {
+    * {
+        background: transparent !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    .no-print {
+        display: none !important;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+    
+    .page-break {
+        page-break-before: always;
+    }
+}
+
+/* Optimisation pour le mode sombre */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #ffffff;
+        --primary-color: #4dabf7;
+    }
+    
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+}
+
+/* Optimisation des performances de rendu */
+.gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Conteneur optimisé pour les animations */
+.animate-container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Optimisation pour les grandes listes */
+.virtual-list {
+    contain: strict;
+    content-visibility: auto;
+    contain-intrinsic-size: 500px;
+}
+
+/* Optimisation des images responsives */
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Optimisation des vidéos */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe,
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Optimisation des formulaires */
+.form-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des tableaux */
+.table-optimized {
+    contain: layout;
+}
+
+/* Optimisation des cartes */
+.card-optimized {
+    contain: layout style;
+}
+
+/* Optimisation des modales */
+.modal-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation pour les mobiles */
+@media (max-width: 768px) {
+    .mobile-optimized {
+        contain: layout style paint;
+    }
+    
+    /* Réduire les animations sur mobile */
+    .mobile-optimized * {
+        animation-duration: 0.2s !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+/* Optimisation pour les connexions lentes */
+@media (prefers-reduced-data: reduce) {
+    .data-heavy {
+        display: none !important;
+    }
+    
+    video,
+    audio,
+    iframe {
+        display: none !important;
+    }
+    
+    img {
+        background-color: #f8f9fa;
+        color: #6c757d;
+    }
+    
+    img::before {
+        content: "[Image]";
+        font-size: 14px;
+    }
+}
+
+/* Optimisation du cache CSS */
+.cache-optimized {
+    contain: strict;
+}
+
+/* Optimisation du rendu du texte */
+.text-optimized {
+    text-rendering: optimizeLegibility;
+    -webkit-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1;
+}
+
+/* Optimisation des espacements */
+.spacing-optimized {
+    contain: layout;
+}
+
+/* Optimisation des boutons */
+.btn-optimized {
+    contain: layout style paint;
+    will-change: transform;
+}
+
+.btn-optimized:hover {
+    transform: translateY(-1px);
+}
+
+/* Optimisation des liens */
+.link-optimized {
+    contain: layout style;
+}
+
+/* Optimisation des alertes */
+.alert-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des badges */
+.badge-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des progress bars */
+.progress-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des tooltips */
+.tooltip-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des popovers */
+.popover-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des dropdowns */
+.dropdown-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des carrousels */
+.carousel-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des accordéons */
+.accordion-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des tabs */
+.tabs-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des modals */
+.modal-backdrop-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des offcanvas */
+.offcanvas-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des toasts */
+.toast-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des spinners */
+.spinner-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des skeletons */
+.skeleton-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des placeholders */
+.placeholder-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des avatars */
+.avatar-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des icônes */
+.icon-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des logos */
+.logo-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des bannières */
+.banner-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des footers */
+.footer-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des headers */
+.header-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des navigations */
+.nav-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des sidebars */
+.sidebar-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des contenus principaux */
+.main-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des sections */
+.section-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des articles */
+.article-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des posts */
+.post-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des commentaires */
+.comment-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des formulaires de recherche */
+.search-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des filtres */
+.filter-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des paginations */
+.pagination-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des breadcrumbs */
+.breadcrumb-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des tags */
+.tag-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des catégories */
+.category-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des métadonnées */
+.metadata-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des timestamps */
+.timestamp-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des auteurs */
+.author-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des dates */
+.date-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des heures */
+.time-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des prix */
+.price-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des notations */
+.rating-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des reviews */
+.review-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des témoignages */
+.testimonial-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des statistiques */
+.stats-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des graphiques */
+.chart-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des dashboards */
+.dashboard-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des widgets */
+.widget-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des panels */
+.panel-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des tiles */
+.tile-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des grilles */
+.grid-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des listes */
+.list-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des menus */
+.menu-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des sous-menus */
+.submenu-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des actions */
+.action-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des commandes */
+.command-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des boutons d'action */
+.action-button-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des liens d'action */
+.action-link-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des icônes d'action */
+.action-icon-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des textes d'action */
+.action-text-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des labels d'action */
+.action-label-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des descriptions d'action */
+.action-description-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des titres d'action */
+.action-title-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des sous-titres d'action */
+.action-subtitle-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des contenus d'action */
+.action-content-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des corps d'action */
+.action-body-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des pieds d'action */
+.action-footer-optimized {
+    contain: layout style paint;
+}
+
+/* Optimisation des en-têtes d'action */
+.action-header-optimized {
+    contain: layout style paint;
+}

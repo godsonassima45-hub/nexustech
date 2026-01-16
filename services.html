@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+
+{% block title %}Services - NexusTech{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">Nos Services</h1>
+        <p class="lead">Des solutions complètes pour répondre à tous vos besoins</p>
+    </div>
+</section>
+
+<!-- Services Details -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Service 1 -->
+            <div class="col-lg-6">
+                <div class="card h-100 shadow-sm service-detail-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="service-icon-large me-3">
+                                <i class="fas fa-laptop-code fa-3x text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title fw-bold mb-0">Développement Web</h3>
+                            </div>
+                        </div>
+                        
+                        <p class="card-text text-muted mb-3">
+                            Nous créons des sites web modernes, rapides et responsifs qui représentent 
+                            votre entreprise de manière professionnelle.
+                        </p>
+                        
+                        <h5 class="fw-bold mb-3">Ce que nous offrons :</h5>
+                        <ul class="list-unstyled mb-3">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Sites web sur mesure</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Applications web complexes</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>E-commerce et boutiques en ligne</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Optimisation SEO</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Maintenance et support</li>
+                        </ul>
+                        
+                        <div class="service-price">
+                            <span class="badge bg-primary fs-6">À partir de 2 500€</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 2 -->
+            <div class="col-lg-6">
+                <div class="card h-100 shadow-sm service-detail-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="service-icon-large me-3">
+                                <i class="fas fa-mobile-alt fa-3x text-success"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title fw-bold mb-0">Applications Mobiles</h3>
+                            </div>
+                        </div>
+                        
+                        <p class="card-text text-muted mb-3">
+                            Développement d'applications mobiles natives et multiplateformes pour iOS et Android.
+                        </p>
+                        
+                        <h5 class="fw-bold mb-3">Ce que nous offrons :</h5>
+                        <ul class="list-unstyled mb-3">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Applications iOS natives</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Applications Android natives</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Applications React Native</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Applications Flutter</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Maintenance et mises à jour</li>
+                        </ul>
+                        
+                        <div class="service-price">
+                            <span class="badge bg-success fs-6">À partir de 5 000€</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 3 -->
+            <div class="col-lg-6">
+                <div class="card h-100 shadow-sm service-detail-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="service-icon-large me-3">
+                                <i class="fas fa-chart-line fa-3x text-warning"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title fw-bold mb-0">Consulting Digital</h3>
+                            </div>
+                        </div>
+                        
+                        <p class="card-text text-muted mb-3">
+                            Stratégie digitale et accompagnement pour transformer votre entreprise.
+                        </p>
+                        
+                        <h5 class="fw-bold mb-3">Ce que nous offrons :</h5>
+                        <ul class="list-unstyled mb-3">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Audit digital</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Stratégie de transformation</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Optimisation des processus</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Formation des équipes</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Accompagnement au changement</li>
+                        </ul>
+                        
+                        <div class="service-price">
+                            <span class="badge bg-warning text-dark fs-6">À partir de 1 500€/jour</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 4 -->
+            <div class="col-lg-6">
+                <div class="card h-100 shadow-sm service-detail-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="service-icon-large me-3">
+                                <i class="fas fa-cloud fa-3x text-info"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title fw-bold mb-0">Solutions Cloud</h3>
+                            </div>
+                        </div>
+                        
+                        <p class="card-text text-muted mb-3">
+                            Migration et optimisation de votre infrastructure dans le cloud.
+                        </p>
+                        
+                        <h5 class="fw-bold mb-3">Ce que nous offrons :</h5>
+                        <ul class="list-unstyled mb-3">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Migration AWS/Azure/GCP</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Architecture cloud</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>DevOps et CI/CD</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Optimisation des coûts</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Sécurité cloud</li>
+                        </ul>
+                        
+                        <div class="service-price">
+                            <span class="badge bg-info text-dark fs-6">Sur devis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Process Section -->
+        <div class="row mt-5 pt-5">
+            <div class="col-12">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold">Notre Processus</h2>
+                    <p class="lead text-muted">Une méthodologie éprouvée pour garantir votre succès</p>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="process-step text-center">
+                            <div class="process-number mb-3">
+                                <span class="badge bg-primary rounded-circle p-3 fs-4">1</span>
+                            </div>
+                            <h5 class="fw-bold">Analyse</h5>
+                            <p class="text-muted">Compréhension de vos besoins et objectifs</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="process-step text-center">
+                            <div class="process-number mb-3">
+                                <span class="badge bg-primary rounded-circle p-3 fs-4">2</span>
+                            </div>
+                            <h5 class="fw-bold">Conception</h5>
+                            <p class="text-muted">Design et architecture de la solution</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="process-step text-center">
+                            <div class="process-number mb-3">
+                                <span class="badge bg-primary rounded-circle p-3 fs-4">3</span>
+                            </div>
+                            <h5 class="fw-bold">Développement</h5>
+                            <p class="text-muted">Implémentation et tests rigoureux</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="process-step text-center">
+                            <div class="process-number mb-3">
+                                <span class="badge bg-primary rounded-circle p-3 fs-4">4</span>
+                            </div>
+                            <h5 class="fw-bold">Livraison</h5>
+                            <p class="text-muted">Déploiement et support continu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-4">Besoin d'une solution sur mesure ?</h2>
+        <p class="lead mb-4">
+            Discutons de votre projet et trouvons la solution idéale pour votre entreprise.
+        </p>
+        <a href="{% url 'contact' %}" class="btn btn-light btn-lg">
+            <i class="fas fa-phone me-2"></i>Demander un devis
+        </a>
+    </div>
+</section>
+{% endblock %}

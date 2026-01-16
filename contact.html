@@ -1,0 +1,295 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact - NexusTech{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">Contactez-nous</h1>
+        <p class="lead">Nous sommes là pour répondre à toutes vos questions</p>
+    </div>
+</section>
+
+<!-- Contact Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Contact Form -->
+            <div class="col-lg-8 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="card-title fw-bold mb-4">Envoyez-nous un message</h3>
+                        
+                        <form method="post">
+                            {% csrf_token %}
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="{{ form.nom.id_for_label }}" class="form-label fw-bold">
+                                        Nom <span class="text-danger">*</span>
+                                    </label>
+                                    {{ form.nom }}
+                                    {% if form.nom.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ form.nom.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label fw-bold">
+                                        Email <span class="text-danger">*</span>
+                                    </label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ form.email.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label for="{{ form.message.id_for_label }}" class="form-label fw-bold">
+                                        Message <span class="text-danger">*</span>
+                                    </label>
+                                    {{ form.message }}
+                                    {% if form.message.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ form.message.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-paper-plane me-2"></i>Envoyer le message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h4 class="card-title fw-bold mb-4">Informations de contact</h4>
+                        
+                        <div class="contact-item mb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="contact-icon me-3">
+                                    <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Adresse</h6>
+                                    <p class="text-muted mb-0">
+                                        123 Avenue des Champs-Élysées<br>
+                                        75008 Paris, France
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item mb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="contact-icon me-3">
+                                    <i class="fas fa-phone fa-2x text-success"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Téléphone</h6>
+                                    <p class="text-muted mb-0">
+                                        +33 1 23 45 67 89<br>
+                                        Lun-Ven: 9h-18h
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item mb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="contact-icon me-3">
+                                    <i class="fas fa-envelope fa-2x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Email</h6>
+                                    <p class="text-muted mb-0">
+                                        contact@proservices.com<br>
+                                        support@proservices.com
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="d-flex align-items-start">
+                                <div class="contact-icon me-3">
+                                    <i class="fab fa-whatsapp fa-2x text-success"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">WhatsApp</h6>
+                                    <p class="text-muted mb-0">
+                                        +33 6 12 34 56 78<br>
+                                        Disponible 24/7
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Office Hours -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h4 class="card-title fw-bold mb-4">Heures d'ouverture</h4>
+                        
+                        <div class="hours-list">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Lundi - Vendredi</span>
+                                <span class="fw-bold">9h - 18h</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Samedi</span>
+                                <span class="fw-bold">10h - 14h</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Dimanche</span>
+                                <span class="fw-bold text-danger">Fermé</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Media -->
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="card-title fw-bold mb-4">Suivez-nous</h4>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-link me-3">
+                                <i class="fab fa-facebook fa-2x text-primary"></i>
+                            </a>
+                            <a href="#" class="social-link me-3">
+                                <i class="fab fa-twitter fa-2x text-info"></i>
+                            </a>
+                            <a href="#" class="social-link me-3">
+                                <i class="fab fa-linkedin fa-2x text-primary"></i>
+                            </a>
+                            <a href="#" class="social-link me-3">
+                                <i class="fab fa-instagram fa-2x text-danger"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-youtube fa-2x text-danger"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold">Questions Fréquentes</h2>
+                    <p class="lead text-muted">Trouvez rapidement des réponses à vos questions</p>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="card-title fw-bold mb-3">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Quels sont vos délais de livraison ?
+                                </h5>
+                                <p class="card-text text-muted">
+                                    Les délais varient selon la complexité du projet. Un site web simple 
+                                    peut être livré en 2-4 semaines, tandis qu'une application complexe 
+                                    peut prendre 3-6 mois.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="card-title fw-bold mb-3">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Proposez-vous un support technique ?
+                                </h5>
+                                <p class="card-text text-muted">
+                                    Oui, nous offrons un support technique 24/7 pour tous nos clients. 
+                                    Plusieurs formules sont disponibles selon vos besoins.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="card-title fw-bold mb-3">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Comment fixez-vous vos prix ?
+                                </h5>
+                                <p class="card-text text-muted">
+                                    Nos tarifs sont établis en fonction de la complexité, des technologies 
+                                    utilisées et du temps de développement. Contactez-nous pour un devis personnalisé.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="card-title fw-bold mb-3">
+                                    <i class="fas fa-question-circle text-primary me-2"></i>
+                                    Travaillez-vous avec des entreprises internationales ?
+                                </h5>
+                                <p class="card-text text-muted">
+                                    Absolument ! Nous avons l'habitude de travailler avec des clients 
+                                    du monde entier et nous maîtrisons les projets à distance.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Nous Trouver</h2>
+            <p class="lead text-muted">Notre bureau est situé au cœur de Paris</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="map-container">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.292292615760461!3d48.87037797928719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fe6e4a4a4a4%3A0x4a4a4a4a4a4a4a4a!2sAvenue%20des%20Champs-%C3%89lys%C3%A9es%2C%2075008%20Paris!5e0!3m2!1sen!2sfr!4v1234567890"
+                                width="100%" 
+                                height="400" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

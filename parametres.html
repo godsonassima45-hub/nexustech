@@ -1,0 +1,665 @@
+{% extends 'base.html' %}
+
+{% block title %}Paramètres - NexusTech{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-4 fw-bold">Paramètres du compte</h1>
+                <p class="lead">Gérez les paramètres de votre compte</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a href="{% url 'tableau_bord' %}" class="btn btn-light">
+                    <i class="fas fa-arrow-left me-2"></i>Retour au tableau de bord
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Settings Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Account Settings -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title fw-bold mb-0">
+                            <i class="fas fa-user-cog me-2"></i>Informations du compte
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="first_name" class="form-label fw-bold">
+                                        <i class="fas fa-user me-2"></i>Prénom
+                                    </label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" 
+                                           value="{{ user.first_name }}" required>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="last_name" class="form-label fw-bold">
+                                        <i class="fas fa-user me-2"></i>Nom
+                                    </label>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" 
+                                           value="{{ user.last_name }}" required>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label for="email" class="form-label fw-bold">
+                                        <i class="fas fa-envelope me-2"></i>Email
+                                    </label>
+                                    <input type="email" class="form-control" id="email" name="email" 
+                                           value="{{ user.email }}" required>
+                                    <small class="text-muted">Cet email sera utilisé pour les notifications et la connexion</small>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <hr>
+                                    <h6 class="fw-bold mb-3">Changer le mot de passe</h6>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="new_password" class="form-label fw-bold">
+                                        <i class="fas fa-lock me-2"></i>Nouveau mot de passe
+                                    </label>
+                                    <input type="password" class="form-control" id="new_password" name="new_password" 
+                                           placeholder="Laissez vide pour ne pas changer">
+                                    <small class="text-muted">Au moins 8 caractères</small>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="confirm_password" class="form-label fw-bold">
+                                        <i class="fas fa-lock me-2"></i>Confirmer le mot de passe
+                                    </label>
+                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" 
+                                           placeholder="Confirmez le nouveau mot de passe">
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Enregistrer les modifications
+                                        </button>
+                                        <a href="{% url 'tableau_bord' %}" class="btn btn-outline-secondary">
+                                            <i class="fas fa-times me-2"></i>Annuler
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Display Settings -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title fw-bold mb-0">
+                            <i class="fas fa-palette me-2"></i>Préférences d'affichage
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <h6 class="fw-bold mb-3">Thème de l'interface</h6>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="form-check form-switch me-3">
+                                    <input class="form-check-input" type="checkbox" id="themeToggleSettings">
+                                    <label class="form-check-label" for="themeToggleSettings">
+                                        <span class="theme-label-light">Mode clair</span>
+                                        <span class="theme-label-dark d-none">Mode sombre</span>
+                                    </label>
+                                </div>
+                                <small class="text-muted">Choisissez entre le mode clair et sombre</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold mb-3">Aperçu des thèmes</h6>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="card border theme-preview" data-theme="light">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Mode clair</h6>
+                                            <p class="card-text small">Interface lumineuse pour une utilisation diurne</p>
+                                            <div class="d-flex gap-1">
+                                                <span class="badge bg-primary">Exemple</span>
+                                                <span class="badge bg-success">Badge</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border theme-preview" data-theme="dark">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Mode sombre</h6>
+                                            <p class="card-text small">Interface sombre pour un confort oculaire nocturne</p>
+                                            <div class="d-flex gap-1">
+                                                <span class="badge bg-primary">Exemple</span>
+                                                <span class="badge bg-success">Badge</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold mb-3">Options supplémentaires</h6>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="autoTheme" checked>
+                                <label class="form-check-label" for="autoTheme">
+                                    Utiliser la préférence système
+                                </label>
+                                <small class="text-muted d-block">Le thème s'adaptera automatiquement aux paramètres de votre appareil</small>
+                            </div>
+                            
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="reduceAnimations">
+                                <label class="form-check-label" for="reduceAnimations">
+                                    Réduire les animations
+                                </label>
+                                <small class="text-muted d-block">Désactive les animations pour une meilleure performance</small>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Raccourci clavier :</strong> Utilisez <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>D</kbd> pour basculer rapidement entre les thèmes.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy Settings -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title fw-bold mb-0">
+                            <i class="fas fa-shield-alt me-2"></i>Confidentialité
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'profil' %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="profile_public" 
+                                           {% if profil.newsletter %}checked{% endif %}>
+                                    <label class="form-check-label" for="profile_public">
+                                        Profil public
+                                    </label>
+                                    <small class="text-muted d-block">Rendez votre profil visible par les autres utilisateurs</small>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="show_email" checked>
+                                    <label class="form-check-label" for="show_email">
+                                        Afficher l'email publiquement
+                                    </label>
+                                    <small class="text-muted d-block">Permet aux autres utilisateurs de voir votre email</small>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="show_phone">
+                                    <label class="form-check-label" for="show_phone">
+                                        Afficher le téléphone publiquement
+                                    </label>
+                                    <small class="text-muted d-block">Permet aux autres utilisateurs de voir votre téléphone</small>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Enregistrer les paramètres de confidentialité
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title fw-bold mb-0">
+                            <i class="fas fa-bell me-2"></i>Notifications
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'profil' %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="email_notifications" checked>
+                                    <label class="form-check-label" for="email_notifications">
+                                        Notifications par email
+                                    </label>
+                                    <small class="text-muted d-block">Recevez les notifications importantes par email</small>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="project_updates" checked>
+                                    <label class="form-check-label" for="project_updates">
+                                        Mises à jour de projets
+                                    </label>
+                                    <small class="text-muted d-block">Soyez notifié des changements dans vos projets</small>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="newsletter_sub" 
+                                           {% if profil.newsletter %}checked{% endif %}>
+                                    <label class="form-check-label" for="newsletter_sub">
+                                        Newsletter ProServices
+                                    </label>
+                                    <small class="text-muted d-block">Recevez nos actualités et offres exclusives</small>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="marketing_emails">
+                                    <label class="form-check-label" for="marketing_emails">
+                                        Emails marketing
+                                    </label>
+                                    <small class="text-muted d-block">Recevez des offres promotionnelles et recommandations</small>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Enregistrer les préférences de notification
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Danger Zone -->
+                <div class="card shadow-sm border-danger">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="card-title fw-bold mb-0">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Zone de danger
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-warning" role="alert">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Attention:</strong> Les actions suivantes sont irréversibles. Veuillez être certain de vouloir continuer.
+                        </div>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card border">
+                                    <div class="card-body">
+                                        <h6 class="card-title fw-bold text-warning">
+                                            <i class="fas fa-download me-2"></i>Exporter mes données
+                                        </h6>
+                                        <p class="card-text small text-muted">
+                                            Téléchargez toutes vos données personnelles au format JSON
+                                        </p>
+                                        <button class="btn btn-outline-warning btn-sm">
+                                            <i class="fas fa-download me-2"></i>Exporter
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card border">
+                                    <div class="card-body">
+                                        <h6 class="card-title fw-bold text-danger">
+                                            <i class="fas fa-user-times me-2"></i>Désactiver le compte
+                                        </h6>
+                                        <p class="card-text small text-muted">
+                                            Désactivez temporairement votre compte
+                                        </p>
+                                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#disableModal">
+                                            <i class="fas fa-pause me-2"></i>Désactiver
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="card border border-danger">
+                                    <div class="card-body">
+                                        <h6 class="card-title fw-bold text-danger">
+                                            <i class="fas fa-trash me-2"></i>Supprimer le compte
+                                        </h6>
+                                        <p class="card-text small text-muted">
+                                            Supprimez définitivement votre compte et toutes vos données
+                                        </p>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                            <i class="fas fa-trash me-2"></i>Supprimer définitivement
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Quick Links -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title fw-bold mb-0">
+                            <i class="fas fa-link me-2"></i>Liens rapides
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'profil' %}" class="list-group-item list-group-item-action">
+                                <i class="fas fa-user me-2"></i>Modifier mon profil
+                            </a>
+                            <a href="{% url 'tableau_bord' %}" class="list-group-item list-group-item-action">
+                                <i class="fas fa-tachometer-alt me-2"></i>Tableau de bord
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-history me-2"></i>Historique des activités
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="fas fa-file-alt me-2"></i>Documents et fichiers
+                            </a>
+                            <a href="{% url 'deconnexion' %}" class="list-group-item list-group-item-action text-danger">
+                                <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Info -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title fw-bold mb-0">
+                            <i class="fas fa-info-circle me-2"></i>Informations du compte
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">ID du compte</label>
+                            <p class="fw-bold font-monospace">#{{ user.id }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">Type de compte</label>
+                            <p class="fw-bold">
+                                <span class="badge bg-primary">Utilisateur Standard</span>
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">Statut</label>
+                            <p class="fw-bold">
+                                <span class="badge bg-success">Actif</span>
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">Espace de stockage utilisé</label>
+                            <div class="d-flex align-items-center">
+                                <div class="progress flex-grow-1 me-2" style="height: 10px;">
+                                    <div class="progress-bar bg-info" style="width: 25%"></div>
+                                </div>
+                                <small class="text-muted">25 MB / 100 MB</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title fw-bold mb-0">
+                            <i class="fas fa-headset me-2"></i>Support
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted small mb-3">
+                            Besoin d'aide avec votre compte ? Notre équipe est là pour vous assister.
+                        </p>
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-envelope me-2"></i>Contacter le support
+                            </a>
+                            <a href="#" class="btn btn-outline-info btn-sm">
+                                <i class="fas fa-book me-2"></i>Centre d'aide
+                            </a>
+                            <a href="#" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-comments me-2"></i>FAQ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Disable Account Modal -->
+<div class="modal fade" id="disableModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Désactiver le compte</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûr de vouloir désactiver votre compte ?</p>
+                <ul>
+                    <li>Votre compte sera inaccessible</li>
+                    <li>Vos données seront conservées</li>
+                    <li>Vous pourrez réactiver votre compte à tout moment</li>
+                    <li>Vous ne recevrez plus de notifications</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-warning">Désactiver le compte</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Account Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Supprimer le compte</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Cette action est irréversible !</strong>
+                </div>
+                <p>Êtes-vous absolument certain de vouloir supprimer votre compte ?</p>
+                <ul>
+                    <li>Toutes vos données seront définitivement supprimées</li>
+                    <li>Vos projets et fichiers seront perdus</li>
+                    <li>Vous ne pourrez pas récupérer votre compte</li>
+                    <li>Toutes vos informations personnelles seront effacées</li>
+                </ul>
+                <div class="mb-3">
+                    <label for="confirm_delete" class="form-label">Tapez "SUPPRIMER" pour confirmer:</label>
+                    <input type="text" class="form-control" id="confirm_delete" placeholder="SUPPRIMER">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger" disabled id="confirmDeleteBtn">Supprimer définitivement</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Synchroniser les sélecteurs de thème
+    const mainToggle = document.getElementById('themeToggle');
+    const settingsToggle = document.getElementById('themeToggleSettings');
+    const autoTheme = document.getElementById('autoTheme');
+    const reduceAnimations = document.getElementById('reduceAnimations');
+    
+    // Mettre à jour l'état des sélecteurs
+    function updateThemeToggles() {
+        const currentTheme = getCurrentTheme();
+        const isChecked = currentTheme === 'dark';
+        
+        if (mainToggle) mainToggle.checked = isChecked;
+        if (settingsToggle) settingsToggle.checked = isChecked;
+        
+        // Mettre à jour les labels
+        updateThemeLabels(isChecked);
+    }
+    
+    // Mettre à jour les labels du thème
+    function updateThemeLabels(isDark) {
+        const lightLabels = document.querySelectorAll('.theme-label-light');
+        const darkLabels = document.querySelectorAll('.theme-label-dark');
+        
+        lightLabels.forEach(label => {
+            label.classList.toggle('d-none', isDark);
+        });
+        
+        darkLabels.forEach(label => {
+            label.classList.toggle('d-none', !isDark);
+        });
+    }
+    
+    // Écouter les changements
+    if (mainToggle) {
+        mainToggle.addEventListener('change', function(e) {
+            const theme = e.target.checked ? 'dark' : 'light';
+            setTheme(theme);
+        });
+    }
+    
+    if (settingsToggle) {
+        settingsToggle.addEventListener('change', function(e) {
+            const theme = e.target.checked ? 'dark' : 'light';
+            setTheme(theme);
+        });
+    }
+    
+    // Gérer le thème automatique
+    if (autoTheme) {
+        autoTheme.addEventListener('change', function(e) {
+            if (e.target.checked) {
+                // Réinitialiser au thème système
+                localStorage.removeItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(prefersDark ? 'dark' : 'light');
+            } else {
+                // Forcer le thème actuel
+                const currentTheme = getCurrentTheme();
+                localStorage.setItem('theme', currentTheme);
+            }
+        });
+    }
+    
+    // Gérer la réduction des animations
+    if (reduceAnimations) {
+        // Charger l'état sauvegardé
+        const savedAnimations = localStorage.getItem('reduceAnimations');
+        reduceAnimations.checked = savedAnimations === 'true';
+        
+        // Appliquer les animations
+        updateAnimations(reduceAnimations.checked);
+        
+        reduceAnimations.addEventListener('change', function(e) {
+            updateAnimations(e.target.checked);
+            localStorage.setItem('reduceAnimations', e.target.checked);
+        });
+    }
+    
+    // Mettre à jour les animations
+    function updateAnimations(reduce) {
+        if (reduce) {
+            document.documentElement.style.setProperty('--transition', 'none');
+            document.body.classList.add('reduce-animations');
+        } else {
+            document.documentElement.style.setProperty('--transition', 'all 0.3s ease');
+            document.body.classList.remove('reduce-animations');
+        }
+    }
+    
+    // Initialiser
+    updateThemeToggles();
+    
+    // Écouter les changements de thème
+    document.addEventListener('themeChanged', function(e) {
+        updateThemeToggles();
+    });
+    
+    // Aperçu des thèmes
+    const themePreviews = document.querySelectorAll('.theme-preview');
+    themePreviews.forEach(preview => {
+        preview.addEventListener('click', function() {
+            const theme = this.getAttribute('data-theme');
+            setTheme(theme);
+        });
+    });
+});
+
+// Styles pour les aperçus de thème
+const style = document.createElement('style');
+style.textContent = `
+    .theme-preview {
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .theme-preview:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .theme-preview[data-theme="dark"] {
+        background-color: #2d2d2d;
+        border-color: #404040 !important;
+    }
+    
+    .theme-preview[data-theme="dark"] .card-title,
+    .theme-preview[data-theme="dark"] .card-text {
+        color: #ffffff;
+    }
+    
+    .theme-preview[data-theme="dark"] .badge {
+        color: #1a1a1a;
+    }
+    
+    .reduce-animations * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    kbd {
+        background-color: #f1f3f4;
+        border: 1px solid #dadce0;
+        border-radius: 4px;
+        padding: 2px 6px;
+        font-family: monospace;
+        font-size: 0.875em;
+    }
+    
+    [data-theme="dark"] kbd {
+        background-color: #2d2d2d;
+        border-color: #404040;
+        color: #ffffff;
+    }
+`;
+document.head.appendChild(style);
+</script>
+{% endblock %}
