@@ -1,0 +1,31 @@
+services:
+  # Web Service
+  - type: web
+    name: nexustech
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn projet.wsgi:application --bind 0.0.0.0:$PORT --workers 1 --timeout 120
+    envVars:
+      - key: SECRET_KEY
+        value: nexustech-production-secure-key-very-long-and-random-123456789
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: localhost,127.0.0.1,.onrender.com,nexustech.io,www.nexustech.io
+      - key: SECURE_SSL_REDIRECT
+        value: True
+      - key: SECURE_HSTS_SECONDS
+        value: 31536000
+      - key: SECURE_HSTS_INCLUDE_SUBDOMAINS
+        value: True
+      - key: SECURE_HSTS_PRELOAD
+        value: True
+
+  # PostgreSQL Database
+  - type: pserv
+    name: nexustech-db
+    env: docker
+    plan: free
+    databaseName: nexustech
+    user: nexustech_user
