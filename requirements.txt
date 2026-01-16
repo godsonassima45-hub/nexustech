@@ -1,0 +1,32 @@
+# Core Django
+Django==5.2.8
+
+# Image processing
+Pillow==12.0.0
+
+# Production web server
+gunicorn==23.0.0
+
+# Static files serving
+whitenoise==6.7.0
+
+# Environment variables management
+python-decouple==3.8
+
+# Database URL parsing for Render
+dj-database-url==2.1.0
+
+# Security and performance
+django-cors-headers==4.4.0
+
+# Development tools (optional)
+django-debug-toolbar==4.4.2
+django-extensions==3.2.3
+
+# Email (optionnel)
+django-anymail==2.2.0
+
+# Utilities
+requests==2.31.0
+python-dateutil==2.8.2
+pytz==2023.3

@@ -1,0 +1,74 @@
+# Dockerfile optimisé pour la production de TechNova
+FROM python:3.11-slim
+
+# Labels
+LABEL maintainer="TechNova <contact@technova.fr>"
+LABEL version="1.0"
+LABEL description="TechNova - Solutions Web Innovantes"
+
+# Variables d'environnement
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    DEBIAN_FRONTEND=noninteractive \
+    DJANGO_SETTINGS_MODULE=projet.settings_prod
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Installer les dépendances système
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        postgresql-client \
+        build-essential \
+        libpq-dev \
+        gettext \
+        curl \
+        netcat \
+        supervisor \
+        cron \
+        htop \
+        && rm -rf /var/lib/apt/lists/*
+
+# Créer l'utilisateur non-root
+RUN groupadd -r django && \
+    useradd -r -g django django
+
+# Copier les fichiers de dépendances
+COPY requirements.txt .
+COPY requirements.prod.txt .
+
+# Installer les dépendances Python
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.prod.txt
+
+# Copier le projet
+COPY --chown=django:django . .
+
+# Créer les répertoires nécessaires et donner les permissions
+RUN mkdir -p /app/staticfiles /app/media /app/logs /app/run && \
+    chown -R django:django /app && \
+    chmod +x /app/deploy_production.sh
+
+# Collecter les fichiers statiques
+RUN python manage.py collectstatic --noinput && \
+    python manage.py migrate --noinput
+
+# Configuration de la santé
+COPY --chown=django:django ./scripts/healthcheck.sh /app/healthcheck.sh
+RUN chmod +x /app/healthcheck.sh
+
+# Configuration de Supervisor
+COPY --chown=django:django ./scripts/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Exposer le port
+EXPOSE 8000
+
+# Utiliser l'utilisateur non-root
+USER django
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD /app/healthcheck.sh
+
+# Démarrage avec Supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
